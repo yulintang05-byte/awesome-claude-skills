@@ -1,0 +1,136 @@
+{
+  "name": "Visual Designer Pro — Brand Kit",
+  "version": "1.0.0",
+  "tagline": "YOUR VISION. MY CRAFT.",
+  "description": "Complete brand identity system for a 2D/3D/Print visual designer building a social media following.",
+
+  "identity": {
+    "name": "[YOUR NAME]",
+    "handle": "@[yourhandle]",
+    "title": "Visual Designer",
+    "specialties": ["2D Design", "3D Modeling", "Print Mastery", "Brand Identity", "Creative Direction"],
+    "bio": "Turning ideas into visual worlds. 2D • 3D • Print • Brand.",
+    "cta_primary": "Follow for daily design drops",
+    "cta_secondary": "DM to hire"
+  },
+
+  "colors": {
+    "primary":   { "hex": "#7B2FFF", "name": "Electric Purple",  "use": "Brand identity, headlines, primary CTA buttons" },
+    "secondary": { "hex": "#00F5FF", "name": "Neon Cyan",        "use": "Accents, glows, secondary highlights" },
+    "premium":   { "hex": "#FFD700", "name": "Prestige Gold",    "use": "Premium badges, milestone callouts" },
+    "bg":        { "hex": "#0A0A0F", "name": "Void Black",       "use": "All backgrounds" },
+    "surface":   { "hex": "#1A1A24", "name": "Deep Panel",       "use": "Cards, overlays, elevated sections" },
+    "text":      { "hex": "#FFFFFF", "name": "Pure White",       "use": "Primary text" },
+    "muted":     { "hex": "#9A9A9A", "name": "Steel Grey",       "use": "Captions, metadata, secondary info" }
+  },
+
+  "typography": {
+    "display": {
+      "font": "Space Grotesk",
+      "weight": "800",
+      "tracking": "0.05em",
+      "use": "Hero headlines, poster titles",
+      "google_fonts": "https://fonts.google.com/specimen/Space+Grotesk"
+    },
+    "headline": {
+      "font": "Inter",
+      "weight": "700",
+      "tracking": "-0.02em",
+      "use": "Section titles, card headlines",
+      "google_fonts": "https://fonts.google.com/specimen/Inter"
+    },
+    "body": {
+      "font": "Inter",
+      "weight": "400",
+      "tracking": "0em",
+      "use": "Body copy, descriptions"
+    },
+    "badge": {
+      "font": "JetBrains Mono",
+      "weight": "600",
+      "tracking": "0.15em",
+      "use": "Skill tags, labels, metadata",
+      "google_fonts": "https://fonts.google.com/specimen/JetBrains+Mono"
+    }
+  },
+
+  "skills_stack": [
+    { "label": "2D",              "icon": "✦", "color": "#7B2FFF" },
+    { "label": "3D",              "icon": "◈", "color": "#00F5FF" },
+    { "label": "PRINT",           "icon": "▣", "color": "#FFD700" },
+    { "label": "BRANDING",        "icon": "◉", "color": "#7B2FFF" },
+    { "label": "MOTION",          "icon": "◎", "color": "#00F5FF" },
+    { "label": "CREATIVE DIR.",   "icon": "★", "color": "#FFD700" }
+  ],
+
+  "content_pillars": {
+    "pillar_1": {
+      "name": "Process Reveal",
+      "frequency": "3x per week",
+      "description": "Show your 2D/3D workflow — wireframes, sketches, renders, final output",
+      "hook_templates": [
+        "From flat sketch → 3D world in 60 seconds",
+        "Nobody shows this part of the process. I will.",
+        "The 5-step system I use for every project"
+      ]
+    },
+    "pillar_2": {
+      "name": "Before / After",
+      "frequency": "2x per week",
+      "description": "Client rebrand or concept transformations — maximum visual contrast",
+      "hook_templates": [
+        "I redesigned this in 2 hours. [Before/After]",
+        "What $5 vs $500 design actually looks like",
+        "Amateur vs Pro: the details that matter"
+      ]
+    },
+    "pillar_3": {
+      "name": "Design Tips",
+      "frequency": "2x per week",
+      "description": "Actionable tips for 2D, 3D, print production — position as expert",
+      "hook_templates": [
+        "3 typography rules every designer ignores",
+        "Why your 3D renders look fake (and the fix)",
+        "Print-ready files: the checklist I use for every client"
+      ]
+    },
+    "pillar_4": {
+      "name": "Portfolio Showcase",
+      "frequency": "1x per week",
+      "description": "High-quality final work — let the craft speak",
+      "hook_templates": [
+        "Spent 40 hours on this. Worth it.",
+        "New work just dropped.",
+        "This one took me 3 iterations to get right."
+      ]
+    }
+  },
+
+  "hashtag_sets": {
+    "design_core": ["#graphicdesign", "#visualdesign", "#designinspo", "#designcommunity", "#creativedesign"],
+    "skill_specific": ["#3dart", "#3ddesign", "#2ddesign", "#printdesign", "#branddesign"],
+    "growth": ["#designtips", "#designprocess", "#learndesign", "#designthinking", "#designlife"],
+    "niche": ["#motiondesign", "#typographydesign", "#posterdesign", "#logodesign", "#designportfolio"]
+  },
+
+  "posting_schedule": {
+    "instagram": {
+      "best_times": ["08:00", "12:00", "19:00"],
+      "best_days": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+      "frequency": "1x daily"
+    },
+    "tiktok": {
+      "best_times": ["07:00", "14:00", "21:00"],
+      "frequency": "2x daily for rapid growth"
+    },
+    "youtube": {
+      "best_times": ["15:00", "20:00"],
+      "best_days": ["Tuesday", "Thursday", "Saturday"],
+      "frequency": "1x weekly"
+    },
+    "pinterest": {
+      "best_times": ["20:00", "23:00"],
+      "frequency": "5-10 pins daily (evergreen)"
+    }
+  }
+}

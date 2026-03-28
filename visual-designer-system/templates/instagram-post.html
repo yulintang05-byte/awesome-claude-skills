@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Post — Visual Designer Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .canvas {
+    width: 540px;
+    height: 540px;
+    background: #0A0A0F;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  /* --- Background geometry --- */
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(123,47,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123,47,255,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .glow-purple {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,47,255,0.35) 0%, transparent 70%);
+    top: -80px;
+    right: -80px;
+  }
+
+  .glow-cyan {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,245,255,0.2) 0%, transparent 70%);
+    bottom: -60px;
+    left: -60px;
+  }
+
+  /* --- 3D wireframe sphere decoration --- */
+  .sphere-wrap {
+    position: absolute;
+    top: 30px;
+    right: 28px;
+    width: 160px;
+    height: 160px;
+    opacity: 0.18;
+  }
+
+  .sphere-wrap svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* --- Geometric accent shapes --- */
+  .hex {
+    position: absolute;
+    bottom: 90px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    opacity: 0.15;
+  }
+
+  .tri {
+    position: absolute;
+    top: 200px;
+    left: 22px;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid #00F5FF;
+    opacity: 0.3;
+    transform: rotate(15deg);
+  }
+
+  /* --- Top label --- */
+  .top-label {
+    position: absolute;
+    top: 28px;
+    left: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: #7B2FFF;
+    text-transform: uppercase;
+  }
+
+  /* --- Main headline block --- */
+  .headline-block {
+    position: absolute;
+    top: 58px;
+    left: 32px;
+    right: 32px;
+  }
+
+  .headline-small {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: #00F5FF;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.9;
+  }
+
+  .headline-main {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 0.92;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .headline-main .accent-purple { color: #7B2FFF; }
+  .headline-main .accent-cyan { color: #00F5FF; }
+
+  /* --- Divider line --- */
+  .divider {
+    position: absolute;
+    top: 232px;
+    left: 32px;
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, #7B2FFF, #00F5FF, transparent);
+  }
+
+  /* --- Sub headline --- */
+  .sub-headline {
+    position: absolute;
+    top: 248px;
+    left: 32px;
+    right: 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #9A9A9A;
+    line-height: 1.6;
+    max-width: 260px;
+  }
+
+  /* --- Skill badges --- */
+  .badges {
+    position: absolute;
+    top: 310px;
+    left: 32px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 300px;
+  }
+
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    padding: 5px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .badge-purple {
+    background: rgba(123,47,255,0.15);
+    border: 1px solid rgba(123,47,255,0.5);
+    color: #7B2FFF;
+  }
+
+  .badge-cyan {
+    background: rgba(0,245,255,0.08);
+    border: 1px solid rgba(0,245,255,0.35);
+    color: #00F5FF;
+  }
+
+  .badge-gold {
+    background: rgba(255,215,0,0.08);
+    border: 1px solid rgba(255,215,0,0.35);
+    color: #FFD700;
+  }
+
+  /* --- CTA block --- */
+  .cta-block {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cta-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .cta-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #9A9A9A;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+
+  .follow-btn {
+    background: linear-gradient(135deg, #7B2FFF, #00F5FF);
+    color: #FFFFFF;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(123,47,255,0.4);
+  }
+
+  /* --- Stats bar --- */
+  .stats-bar {
+    position: absolute;
+    bottom: 90px;
+    left: 32px;
+    display: flex;
+    gap: 24px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: #9A9A9A;
+    text-transform: uppercase;
+  }
+
+  /* --- Vertical rule --- */
+  .v-rule {
+    position: absolute;
+    right: 32px;
+    top: 60px;
+    width: 1px;
+    height: 340px;
+    background: linear-gradient(180deg, transparent, rgba(123,47,255,0.3) 30%, rgba(0,245,255,0.3) 70%, transparent);
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <!-- Background layers -->
+  <div class="bg-grid"></div>
+  <div class="glow-purple"></div>
+  <div class="glow-cyan"></div>
+  <div class="v-rule"></div>
+  <div class="tri"></div>
+
+  <!-- Wireframe sphere -->
+  <div class="sphere-wrap">
+    <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="80" cy="80" r="70" stroke="#7B2FFF" stroke-width="0.8"/>
+      <ellipse cx="80" cy="80" rx="70" ry="28" stroke="#7B2FFF" stroke-width="0.6"/>
+      <ellipse cx="80" cy="80" rx="70" ry="50" stroke="#7B2FFF" stroke-width="0.5"/>
+      <ellipse cx="80" cy="80" rx="35" ry="70" stroke="#00F5FF" stroke-width="0.5"/>
+      <ellipse cx="80" cy="80" rx="60" ry="70" stroke="#00F5FF" stroke-width="0.4"/>
+      <line x1="10" y1="80" x2="150" y2="80" stroke="#7B2FFF" stroke-width="0.5"/>
+      <line x1="80" y1="10" x2="80" y2="150" stroke="#00F5FF" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Hex decoration -->
+  <div class="hex">
+    <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="30,2 56,16 56,44 30,58 4,44 4,16" stroke="#FFD700" stroke-width="1.5" fill="none"/>
+      <polygon points="30,10 48,20 48,40 30,50 12,40 12,20" stroke="#FFD700" stroke-width="0.8" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="top-label">Visual Designer</div>
+
+  <div class="headline-block">
+    <div class="headline-small">Daily Design Drops</div>
+    <div class="headline-main">
+      FOLLOW<br>
+      FOR <span class="accent-purple">PRO</span><br>
+      <span class="accent-cyan">DESIGN</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sub-headline">
+    2D illustration · 3D renders · Print-ready files.<br>
+    Tips, process & portfolio, every day.
+  </div>
+
+  <div class="badges">
+    <span class="badge badge-purple">2D</span>
+    <span class="badge badge-cyan">3D</span>
+    <span class="badge badge-gold">PRINT</span>
+    <span class="badge badge-purple">BRANDING</span>
+    <span class="badge badge-cyan">MOTION</span>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-value">500+</span>
+      <span class="stat-label">Projects</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">8yr</span>
+      <span class="stat-label">Experience</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">2D·3D</span>
+      <span class="stat-label">Mastery</span>
+    </div>
+  </div>
+
+  <div class="cta-block">
+    <div>
+      <div class="cta-text">Follow for daily drops</div>
+      <div class="cta-sub">@yourhandle · Design • Create • Inspire</div>
+    </div>
+    <button class="follow-btn">FOLLOW ↗</button>
+  </div>
+</div>
+</body>
+</html>

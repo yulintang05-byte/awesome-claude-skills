@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram Story — Visual Designer Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    padding: 40px;
+  }
+
+  /* Story: 1080x1920 rendered at 360x640 (33%) */
+  .canvas {
+    width: 360px;
+    height: 640px;
+    background: #0A0A0F;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  }
+
+  /* Background */
+  .bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #0F0A1E 0%, #0A0A0F 40%, #0A1020 100%);
+  }
+
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(123,47,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123,47,255,0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .glow-top {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,47,255,0.3) 0%, transparent 65%);
+    top: -100px;
+    right: -60px;
+  }
+
+  .glow-bottom {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,245,255,0.2) 0%, transparent 65%);
+    bottom: -80px;
+    left: -40px;
+  }
+
+  /* Progress bar (story UI) */
+  .progress-bar {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    gap: 4px;
+    z-index: 10;
+  }
+
+  .progress-segment {
+    height: 2px;
+    flex: 1;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+  }
+
+  .progress-segment.active {
+    background: #FFFFFF;
+  }
+
+  /* Top user bar */
+  .user-bar {
+    position: absolute;
+    top: 28px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7B2FFF, #00F5FF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .user-info {
+    flex: 1;
+  }
+
+  .username {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: #FFFFFF;
+  }
+
+  .time-ago {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Main hook headline */
+  .hook-section {
+    position: absolute;
+    top: 90px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .hook-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: #00F5FF;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .hook-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 0.9;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .hook-headline .accent { color: #7B2FFF; }
+  .hook-headline .accent2 { color: #00F5FF; }
+
+  /* Visual split section — 2D vs 3D */
+  .split-section {
+    position: absolute;
+    top: 270px;
+    left: 24px;
+    right: 24px;
+    height: 170px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .split-panel {
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .split-panel-2d {
+    background: rgba(123,47,255,0.12);
+    border: 1px solid rgba(123,47,255,0.3);
+  }
+
+  .split-panel-3d {
+    background: rgba(0,245,255,0.06);
+    border: 1px solid rgba(0,245,255,0.25);
+  }
+
+  .split-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .split-panel-2d .split-label { color: #7B2FFF; }
+  .split-panel-3d .split-label { color: #00F5FF; }
+
+  /* 2D flat shapes illustration */
+  .flat-art {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* 3D wireframe */
+  .wire-art {
+    width: 80px;
+    height: 80px;
+  }
+
+  .split-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    color: #9A9A9A;
+    text-align: center;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* Skills list */
+  .skills-section {
+    position: absolute;
+    top: 460px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .skills-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: #9A9A9A;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .skills-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: #FFFFFF;
+  }
+
+  .skill-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Bottom CTA */
+  .bottom-cta {
+    position: absolute;
+    bottom: 28px;
+    left: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .follow-pill {
+    background: linear-gradient(90deg, #7B2FFF, #00F5FF);
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 12px 32px;
+    border-radius: 100px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 24px rgba(123,47,255,0.5);
+  }
+
+  .swipe-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* Divider line */
+  .h-divider {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(123,47,255,0.4), rgba(0,245,255,0.4), transparent);
+  }
+
+  .divider-1 { top: 255px; }
+  .divider-2 { top: 450px; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+  <div class="glow-top"></div>
+  <div class="glow-bottom"></div>
+
+  <!-- Story progress -->
+  <div class="progress-bar">
+    <div class="progress-segment active"></div>
+    <div class="progress-segment"></div>
+    <div class="progress-segment"></div>
+  </div>
+
+  <!-- User bar -->
+  <div class="user-bar">
+    <div class="avatar">VD</div>
+    <div class="user-info">
+      <div class="username">@yourhandle</div>
+      <div class="time-ago">Just now</div>
+    </div>
+  </div>
+
+  <!-- Hook headline -->
+  <div class="hook-section">
+    <div class="hook-eyebrow">◎ Designer spotlight</div>
+    <div class="hook-headline">
+      I CREATE<br>
+      <span class="accent">WORLDS</span><br>
+      IN <span class="accent2">2D</span><br>
+      &amp; <span class="accent">3D</span>
+    </div>
+  </div>
+
+  <div class="h-divider divider-1"></div>
+
+  <!-- Visual split -->
+  <div class="split-section">
+    <div class="split-panel split-panel-2d">
+      <div class="split-label">2D Flat</div>
+      <svg class="flat-art" viewBox="0 0 80 80" fill="none">
+        <rect x="8" y="8" width="30" height="30" fill="#7B2FFF" opacity="0.8"/>
+        <rect x="20" y="20" width="30" height="30" fill="#00F5FF" opacity="0.5"/>
+        <circle cx="55" cy="20" r="12" fill="#FFD700" opacity="0.7"/>
+        <polygon points="10,70 35,42 60,70" fill="#7B2FFF" opacity="0.5"/>
+        <rect x="42" y="48" width="28" height="20" rx="2" fill="rgba(255,255,255,0.1)" stroke="#7B2FFF" stroke-width="1"/>
+      </svg>
+      <div class="split-desc">Vector · Illustration<br>UI Design</div>
+    </div>
+    <div class="split-panel split-panel-3d">
+      <div class="split-label">3D Render</div>
+      <svg class="wire-art" viewBox="0 0 80 80" fill="none">
+        <circle cx="40" cy="40" r="32" stroke="#00F5FF" stroke-width="0.8"/>
+        <ellipse cx="40" cy="40" rx="32" ry="13" stroke="#00F5FF" stroke-width="0.7"/>
+        <ellipse cx="40" cy="40" rx="32" ry="24" stroke="#7B2FFF" stroke-width="0.6"/>
+        <ellipse cx="40" cy="40" rx="16" ry="32" stroke="#7B2FFF" stroke-width="0.6"/>
+        <ellipse cx="40" cy="40" rx="28" ry="32" stroke="#00F5FF" stroke-width="0.4"/>
+        <line x1="8" y1="40" x2="72" y2="40" stroke="#00F5FF" stroke-width="0.5"/>
+        <line x1="40" y1="8" x2="40" y2="72" stroke="#7B2FFF" stroke-width="0.5"/>
+      </svg>
+      <div class="split-desc">Modeling · Renders<br>Motion &amp; VFX</div>
+    </div>
+  </div>
+
+  <div class="h-divider divider-2"></div>
+
+  <!-- Skills list -->
+  <div class="skills-section">
+    <div class="skills-title">Full skill stack</div>
+    <div class="skills-list">
+      <div class="skill-item">
+        <div class="skill-dot" style="background:#7B2FFF"></div>
+        2D Illustration
+      </div>
+      <div class="skill-item">
+        <div class="skill-dot" style="background:#00F5FF"></div>
+        3D Modeling
+      </div>
+      <div class="skill-item">
+        <div class="skill-dot" style="background:#FFD700"></div>
+        Print Mastery
+      </div>
+      <div class="skill-item">
+        <div class="skill-dot" style="background:#7B2FFF"></div>
+        Brand Identity
+      </div>
+      <div class="skill-item">
+        <div class="skill-dot" style="background:#00F5FF"></div>
+        Motion Graphics
+      </div>
+      <div class="skill-item">
+        <div class="skill-dot" style="background:#FFD700"></div>
+        Creative Direction
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="bottom-cta">
+    <div class="follow-pill">Follow for daily design drops</div>
+    <div class="swipe-hint">↑ swipe up to see portfolio</div>
+  </div>
+</div>
+</body>
+</html>

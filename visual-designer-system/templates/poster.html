@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services Poster — Visual Designer Brand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    padding: 40px;
+  }
+
+  /* A3 proportions: 420x594mm → rendered at 480x678px */
+  .canvas {
+    width: 480px;
+    height: 678px;
+    background: #0A0A0F;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.9);
+  }
+
+  /* Background */
+  .bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(170deg, #100820 0%, #0A0A0F 45%, #050D18 100%);
+  }
+
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(123,47,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(123,47,255,0.04) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .glow-tr {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,47,255,0.22) 0%, transparent 60%);
+    top: -150px;
+    right: -120px;
+  }
+
+  .glow-bl {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,245,255,0.12) 0%, transparent 60%);
+    bottom: -120px;
+    left: -80px;
+  }
+
+  /* Top bar */
+  .top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #7B2FFF, #00F5FF, #FFD700);
+  }
+
+  /* Header section */
+  .header {
+    position: absolute;
+    top: 36px;
+    left: 40px;
+    right: 40px;
+  }
+
+  .header-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    color: #7B2FFF;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .header-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 70px;
+    font-weight: 800;
+    line-height: 0.88;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+
+  .header-title .line-gradient {
+    background: linear-gradient(90deg, #7B2FFF 0%, #00F5FF 60%, #FFD700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Tagline */
+  .tagline {
+    position: absolute;
+    top: 228px;
+    left: 40px;
+    right: 40px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #9A9A9A;
+    letter-spacing: 0.03em;
+    line-height: 1.6;
+    border-left: 2px solid rgba(123,47,255,0.5);
+    padding-left: 14px;
+  }
+
+  /* H divider */
+  .h-rule {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, #7B2FFF, rgba(0,245,255,0.5), transparent);
+  }
+
+  .rule-1 { top: 210px; }
+  .rule-2 { top: 278px; }
+  .rule-3 { top: 574px; }
+
+  /* Services grid */
+  .services-section {
+    position: absolute;
+    top: 294px;
+    left: 40px;
+    right: 40px;
+  }
+
+  .services-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: #9A9A9A;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+  }
+
+  .service-card.s-purple::after { background: #7B2FFF; }
+  .service-card.s-cyan::after   { background: #00F5FF; }
+  .service-card.s-gold::after   { background: #FFD700; }
+  .service-card.s-white::after  { background: rgba(255,255,255,0.2); }
+
+  .service-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .s-purple .service-number { color: #7B2FFF; }
+  .s-cyan   .service-number { color: #00F5FF; }
+  .s-gold   .service-number { color: #FFD700; }
+  .s-white  .service-number { color: rgba(255,255,255,0.3); }
+
+  .service-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .service-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: #9A9A9A;
+    line-height: 1.5;
+  }
+
+  /* Large decorative wireframe */
+  .wireframe-decor {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    width: 140px;
+    height: 140px;
+    opacity: 0.07;
+  }
+
+  /* Bottom CTA */
+  .bottom-section {
+    position: absolute;
+    bottom: 26px;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bottom-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cta-main {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .cta-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #9A9A9A;
+    letter-spacing: 0.15em;
+  }
+
+  .hire-btn {
+    background: transparent;
+    border: 1px solid;
+    border-image: linear-gradient(135deg, #7B2FFF, #00F5FF) 1;
+    color: #FFFFFF;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hire-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(123,47,255,0.15), rgba(0,245,255,0.1));
+  }
+
+  .hire-btn span {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Skill tags row */
+  .skill-tags {
+    position: absolute;
+    bottom: 80px;
+    left: 40px;
+    right: 40px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .stag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    padding: 4px 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+  <div class="glow-tr"></div>
+  <div class="glow-bl"></div>
+  <div class="top-bar"></div>
+
+  <!-- Wireframe decoration -->
+  <div class="wireframe-decor">
+    <svg viewBox="0 0 140 140" fill="none">
+      <circle cx="70" cy="70" r="60" stroke="#7B2FFF" stroke-width="1"/>
+      <ellipse cx="70" cy="70" rx="60" ry="24" stroke="#7B2FFF" stroke-width="0.8"/>
+      <ellipse cx="70" cy="70" rx="60" ry="44" stroke="#00F5FF" stroke-width="0.6"/>
+      <ellipse cx="70" cy="70" rx="30" ry="60" stroke="#00F5FF" stroke-width="0.6"/>
+      <ellipse cx="70" cy="70" rx="52" ry="60" stroke="#7B2FFF" stroke-width="0.4"/>
+      <line x1="10" y1="70" x2="130" y2="70" stroke="#7B2FFF" stroke-width="0.5"/>
+      <line x1="70" y1="10" x2="70" y2="130" stroke="#00F5FF" stroke-width="0.5"/>
+      <!-- Latitude lines -->
+      <ellipse cx="70" cy="46" rx="51" ry="10" stroke="#7B2FFF" stroke-width="0.3" opacity="0.5"/>
+      <ellipse cx="70" cy="94" rx="51" ry="10" stroke="#7B2FFF" stroke-width="0.3" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-eyebrow">✦ Design Services — 2026</div>
+    <div class="header-title">
+      YOUR<br>
+      VISION<br>
+      <span class="line-gradient">MY CRAFT</span>
+    </div>
+  </div>
+
+  <div class="h-rule rule-1"></div>
+
+  <!-- Tagline -->
+  <div class="tagline">
+    2D Design · 3D Modeling · Print Mastery · Brand Identity<br>
+    Premium creative work. Delivered with precision.
+  </div>
+
+  <div class="h-rule rule-2"></div>
+
+  <!-- Services -->
+  <div class="services-section">
+    <div class="services-label">What I do</div>
+    <div class="services-grid">
+      <div class="service-card s-purple">
+        <div class="service-number">01 ——</div>
+        <div class="service-name">2D Design</div>
+        <div class="service-desc">Illustration, UI, icons, vector art & brand visuals</div>
+      </div>
+      <div class="service-card s-cyan">
+        <div class="service-number">02 ——</div>
+        <div class="service-name">3D Modeling</div>
+        <div class="service-desc">Renders, product viz, sculpt, motion & VFX</div>
+      </div>
+      <div class="service-card s-gold">
+        <div class="service-number">03 ——</div>
+        <div class="service-name">Print Mastery</div>
+        <div class="service-desc">CMYK press-ready, packaging, posters & collateral</div>
+      </div>
+      <div class="service-card s-white">
+        <div class="service-number">04 ——</div>
+        <div class="service-name">Brand Identity</div>
+        <div class="service-desc">Logo systems, guidelines, strategy & positioning</div>
+      </div>
+      <div class="service-card s-purple">
+        <div class="service-number">05 ——</div>
+        <div class="service-name">Motion</div>
+        <div class="service-desc">Animation, transitions, reels & social motion</div>
+      </div>
+      <div class="service-card s-cyan">
+        <div class="service-number">06 ——</div>
+        <div class="service-name">Creative Direction</div>
+        <div class="service-desc">Campaign strategy, art direction & visual concept</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skill tags -->
+  <div class="skill-tags">
+    <span class="stag">Figma</span>
+    <span class="stag">Blender</span>
+    <span class="stag">Illustrator</span>
+    <span class="stag">Photoshop</span>
+    <span class="stag">Cinema 4D</span>
+    <span class="stag">After Effects</span>
+    <span class="stag">InDesign</span>
+  </div>
+
+  <div class="h-rule rule-3"></div>
+
+  <!-- Bottom CTA -->
+  <div class="bottom-section">
+    <div class="bottom-left">
+      <div class="cta-main">Follow + Hire Me</div>
+      <div class="cta-sub">@yourhandle · yourportfolio.com</div>
+    </div>
+    <div class="hire-btn"><span>GET IN TOUCH ↗</span></div>
+  </div>
+</div>
+</body>
+</html>
