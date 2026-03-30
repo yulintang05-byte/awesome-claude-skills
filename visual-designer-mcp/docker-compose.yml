@@ -1,0 +1,16 @@
+services:
+  visual-designer-mcp:
+    build: .
+    image: visual-designer-mcp:latest
+    container_name: visual-designer-mcp
+    stdin_open: true
+    tty: false
+    volumes:
+      # Mount local output folder so rendered PNGs appear on your Mac
+      - ./output:/app/output
+      # Mount design system so templates are live-editable
+      - ../visual-designer-system:/app/visual-designer-system:ro
+    environment:
+      - NODE_ENV=production
+      - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+      - PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium

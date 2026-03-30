@@ -1,0 +1,23 @@
+{
+  "name": "visual-designer-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for visual designers — render templates to PNG, export tokens, generate social copy, create color palettes",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "docker:build": "docker build -t visual-designer-mcp .",
+    "docker:run": "docker run -i --rm -v $(pwd)/output:/app/output visual-designer-mcp"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.2",
+    "puppeteer-core": "^24.6.0",
+    "chroma-js": "^3.1.2",
+    "sharp": "^0.34.1",
+    "zod": "^3.24.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

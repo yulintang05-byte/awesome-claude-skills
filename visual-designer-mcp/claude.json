@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "visual-designer": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-v", "./output:/app/output",
+        "-v", "../visual-designer-system:/app/visual-designer-system:ro",
+        "visual-designer-mcp:latest"
+      ]
+    }
+  }
+}
