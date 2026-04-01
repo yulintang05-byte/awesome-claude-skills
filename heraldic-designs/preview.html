@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Heraldic Designs — Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 40px;
+    font-family: 'Georgia', serif;
+  }
+  h1 {
+    color: #c9a84c;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+    opacity: 0.8;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1280px;
+    width: 100%;
+  }
+  .design-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .design-card img, .design-card object {
+    width: 100%;
+    max-width: 520px;
+    filter: drop-shadow(0 8px 40px rgba(201,168,76,0.15));
+    transition: filter 0.3s;
+  }
+  .design-card:hover img,
+  .design-card:hover object {
+    filter: drop-shadow(0 12px 60px rgba(201,168,76,0.3));
+  }
+  .label {
+    color: #c9a84c;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .divider {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #c9a84c44, transparent);
+  }
+  footer {
+    margin-top: 80px;
+    color: #333;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+  <h1>Heraldic Design System</h1>
+  <div class="grid">
+    <div class="design-card">
+      <img src="coat-of-arms.svg" alt="Coat of Arms — Crux Aeterna"/>
+      <span class="label">I · Crux Aeterna</span>
+    </div>
+    <div class="design-card">
+      <img src="lion-cross.svg" alt="Lion Cross — Ordo Leonis"/>
+      <span class="label">II · Ordo Leonis</span>
+    </div>
+  </div>
+  <footer>Open in VSCode · Animate in Remotion</footer>
+</body>
+</html>

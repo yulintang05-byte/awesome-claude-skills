@@ -1,0 +1,23 @@
+{
+  "name": "heraldic-remotion",
+  "version": "1.0.0",
+  "description": "Animated heraldic designs — Coat of Arms & Lion Cross",
+  "scripts": {
+    "start":   "npx remotion studio",
+    "build":   "npx remotion render CoatOfArms out/coat-of-arms.mp4",
+    "render:lion": "npx remotion render LionCross out/lion-cross.mp4",
+    "render:duo":  "npx remotion render HeraldDuo out/herald-duo.mp4",
+    "still:arms":  "npx remotion still CoatOfArms out/coat-of-arms.png --frame=60",
+    "still:lion":  "npx remotion still LionCross  out/lion-cross.png  --frame=60"
+  },
+  "dependencies": {
+    "@remotion/cli":    "4.0.229",
+    "react":            "^18.2.0",
+    "react-dom":        "^18.2.0",
+    "remotion":         "4.0.229"
+  },
+  "devDependencies": {
+    "@types/react":     "^18.2.0",
+    "typescript":       "^5.4.5"
+  }
+}
