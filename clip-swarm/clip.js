@@ -12,8 +12,10 @@ import { resolve, basename, extname } from "path";
 import { fileURLToPath } from "url";
 
 const require = createRequire(import.meta.url);
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
+const ffmpegPath  = require("@ffmpeg-installer/ffmpeg").path;
+const ffprobePath = require("@ffprobe-installer/ffprobe").path;
 ffmpeg.setFfmpegPath(ffmpegPath);
+ffmpeg.setFfprobePath(ffprobePath);
 
 const HOOKS = [
   "Wait for it… 👀",
@@ -109,8 +111,10 @@ async function main() {
     process.exit(1);
   }
 
-  const numClips   = parseInt(args[args.indexOf("--clips")    + 1] || "20");
-  const clipLen    = parseInt(args[args.indexOf("--duration") + 1] || "30");
+  const clipsIdx   = args.indexOf("--clips");
+  const durIdx     = args.indexOf("--duration");
+  const numClips   = clipsIdx   !== -1 ? parseInt(args[clipsIdx   + 1]) : 20;
+  const clipLen    = durIdx     !== -1 ? parseInt(args[durIdx     + 1]) : 30;
   const outDir     = resolve(`clips-${basename(input, extname(input))}`);
 
   mkdirSync(outDir, { recursive: true });
@@ -169,4 +173,4 @@ async function main() {
   for (let i = 0; i < Math.min(CONCURRENCY, numClips); i++) runNext();
 }
 
-main().catch(console.error);
+if (isMainThread) main().catch(console.error);
